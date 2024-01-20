@@ -1,0 +1,12 @@
+<!-- Add this to the existing HTML structure -->
+<label for="num1">Number 1:</label>
+<input type="number" id="num1" name="num1" required>
+
+<label for="num2">Number 2:</label>
+<input type="number" id="num2" name="num2" required>
+
+<button type="button" onclick="calculateSum()">Calculate Sum</button>
+
+<p id="result"></p>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
