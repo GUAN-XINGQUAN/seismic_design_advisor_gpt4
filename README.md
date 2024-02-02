@@ -1,4 +1,4 @@
-# SeismicDesignAdvisor-GPT4
+# Seismic Design Advisor-GPT4
 
 This project integrates the large language model with the [AutoSDA platform](https://github.com/GUAN-XINGQUAN/AutoSDAPlatform) to facilitate the seismic design process.
 
