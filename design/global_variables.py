@@ -1,8 +1,20 @@
+# This file is used to declare all global variables.
+# Re-factored by GUAN, XINGQUAN in Feb. 2024
+
 from pathlib import Path
 from steel_material import SteelMaterial
 from sections import Sections
 
 BASE_DIRECTORY = Path.cwd()
+
+# Steel material unit: ksi
+STEEL = SteelMaterial(yield_stress=50, ultimate_stress=65, elastic_modulus=29000, Ry_value=1.1)
+
+# Different section database that will be used across the board
+SECTION_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
+BEAM_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
+COLUMN_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
+
 
 class GlobalVariables:
     """
@@ -41,16 +53,9 @@ class GlobalVariables:
     # When reduced-beam section is used at beam/column interface, we need the factor to bump up the drift.
     RBS_STIFFNESS_FACTOR = 1.10
 
-    # Steel material unit: ksi
-    STEEL = SteelMaterial(yield_stress=50, ultimate_stress=65, elastic_modulus=29000, Ry_value=1.1)
-
-    # Different section database that will be used across the board
-    SECTION_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
-    BEAM_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
-    COLUMN_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
 
 if __name__ == '__main__':
     print("The design drift limit is: ")
     print(GlobalVariables.DRIFT_LIMIT)
     print("The section database is: ")
-    print(GlobalVariables.SECTION_DATABASE.dataframe.head(3))
+    print(SECTION_DATABASE.dataframe.head(3))
