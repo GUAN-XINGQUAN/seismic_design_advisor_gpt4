@@ -123,6 +123,44 @@ class Sections:
         economic_section_size = filtered_df.loc[(filtered_df[property_name] - property_value).idxmin(), 'section size']
         return economic_section_size
 
+    def decrease_member_size(self, candidates: list[str], size: str) -> str:
+        """
+        Given a candidate list and current size, this function returns the next smaller size.
+
+        Args:
+            candidates: a list of string such as ["W14X730", "W14X550" ...].
+            size: string such as "W14X730".
+
+        Returns:
+            a string that specifies the next section size.
+
+        Raises:
+            ValueError: the next smaller size does not exist, indicating candidates list should cover smaller sections.
+        """
+        idx = candidates.index(size)
+        if idx + 1 > len(candidates):
+            raise ValueError(f'The lower bound for depth initialization is too large.')
+        return candidates[idx + 1]
+
+    def increase_member_size(self, candidates: list[str], size: str) -> str:
+        """
+        Given a candidate list and current size, this function returns the next larger size.
+
+        Args:
+            candidates: a list of string such as ["W14X730", "W14X550" ...].
+            size: string such as "W14X730".
+
+        Returns:
+            a string that specifies the next section size.
+
+        Raises:
+            ValueError: the next larger size does not exist, indicating candidates list should cover larger sections.
+        """
+        idx = candidates.index(size)
+        if idx - 1 < 0:
+            raise ValueError(f'The upper bound for depth initialization is too small.')
+        return candidates[idx - 1]
+
 
 if __name__ == '__main__':
     SECTION_DATABASE = Sections(BASE_DIRECTORY / 'section_database' / 'all_sections.jsonl')
