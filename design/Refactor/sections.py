@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 from typing import Union
 
-BASE_DIRECTORY = Path.cwd()
+BASE_DIRECTORY = Path(__file__).parent
 
 
 class Sections:
